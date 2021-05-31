@@ -2,102 +2,148 @@ require("file-loader?name=[name].[ext]!./index.html");
 import React from "react";
 import ReactDOM from "react-dom";
 
-const app = {
-  title: "Note Taking App",
-  options: [],
-  note: [],
-  noteTime: [],
-};
+// Implement:
+//- Capitalize Note Functionality
+//- Note Time
+//- Total Characters Inserted
 
-const capitalizeInput = function (input) {
-  const names = input.split(" ");
-  const namesUpper = [];
-
-  for (const n of names) {
-    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+class NoteTakingApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteNotes = this.handleDeleteNotes.bind(this);
+    this.handleAddNote = this.handleAddNote.bind(this);
+    this.capitalizeInput = this.capitalizeInput.bind(this);
+    this.state = {
+      notes: [],
+      notesLength: [],
+      notesTime: [],
+    };
   }
-  return namesUpper.join(" ");
-};
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-  const option = document.querySelector(".note");
-  let existingNote = false;
+  capitalizeInput(input) {
+    return input[0].toUpperCase() + input.slice(1);
+  }
 
-  for (let i = 0; i < app.options.length; i++) {
-    if (option.value === app.options[i]) {
-      alert("This note already exists");
-      option.value = "";
-      existingNote = true;
+  handleDeleteNotes() {
+    this.setState(() => {
+      return {
+        notes: [],
+      };
+    });
+  }
+
+  handleAddNote(note) {
+    if (!note) {
+      return "Enter Valid Value to Add Item";
+    } else if (this.state.notes.indexOf(this.capitalizeInput(note)) > -1) {
+      return "This note already exists";
     }
+
+    this.setState((prevState) => {
+      let time = [new Date().toUTCString()];
+      console.log(time);
+      return {
+        notes: prevState.notes.concat([this.capitalizeInput(note)]),
+        notesLength: prevState.notesLength.concat([
+          [...note.replace(/ /g, "")].length,
+        ]),
+        notesTime: prevState.notesTime.concat(time),
+      };
+    });
   }
 
-  if (option.value && existingNote === false) {
-    app.options.push(capitalizeInput(option.value));
-    app.note.push([...option.value.replace(/ /g, "")].length);
-    console.log(app.note);
-    const time = new Date().toUTCString();
-    app.noteTime.push(time);
-    option.value = "";
-    renderFunction();
-  }
-};
+  //Using this component only to render the other components
+  render() {
+    const title = "Note Making App";
+    const subtitle = "Write Down Some Notes";
 
-const removeAll = () => {
-  app.options = [];
-  app.note = [];
-  app.noteTime = [];
-  renderFunction();
-};
-const appRoot = document.getElementById("app");
-
-let variable = true;
-
-const showHideDetails = () => {
-  console.log("red");
-  if (variable === true) variable = false;
-  else variable = true;
-  renderFunction();
-};
-
-function renderFunction() {
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      <p>{app.options.length > 0 ? "Here are your notes taken" : "No notes"}</p>
-      <button onClick={removeAll}>Remove</button>
+    return (
       <div>
-        {app.options.map((options, i) => {
-          return (
-            <div key={options}>
-              {" "}
-              <strong>Note {i + 1}: </strong>
-              {options}
-              <li>
-                <strong>Total Characters: </strong> {app.note[i]}
-              </li>
-              <li>
-                <strong>Time: </strong> {app.noteTime[i]}{" "}
-              </li>
-            </div>
-          );
-        })}
+        <Header title={title} subtitle={subtitle} />
+        <Notes
+          notes={this.state.notes}
+          notesLength={this.state.notesLength}
+          notesTime={this.state.notesTime}
+          handleDeleteNotes={this.handleDeleteNotes}
+        />
+        <AddNotes
+          handleAddNote={this.handleAddNote}
+          capitalizeInput={this.capitalizeInput}
+        />
       </div>
-      <form onSubmit={onFormSubmit}>
-        <input type="text" className="note"></input>
-        <button>Add Note</button>
-      </form>
-      <button onClick={showHideDetails}>
-        {variable === true ? "Show Explanation" : "Hide Explanation"}
-      </button>
-      <p>
-        {variable === false
-          ? "This app allows the user to take notes by inputting a note in the form above and pressing the button 'Add Note' and returns the number of characters that the user has put into the note"
-          : ""}
-      </p>
-    </div>
-  );
-  ReactDOM.render(template, appRoot);
+    );
+  }
 }
 
-renderFunction();
+class Header extends React.Component {
+  //Method to define this react componen
+  render() {
+    return (
+      <div>
+        <h1> {this.props.title} </h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+    );
+  }
+}
+
+class Notes extends React.Component {
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.handleDeleteNotes}>Remove All</button>
+        {this.props.notes.map((i, note) => (
+          <div >
+            <strong>Note{note + 1}:</strong> {this.props.notes[note]}
+            <li key={`Date--${i + 1}`}>
+              <strong >Date: </strong> {this.props.notesTime[note]}
+              {}
+            </li>
+            <li key={`Note--${i + 1}`}>
+              <strong>Number Of Characters: </strong>
+              {this.props.notesLength[note]}
+              {}
+            </li>
+          </div>
+        ))}
+      </div>
+    );
+  }
+}
+
+class AddNotes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+    this.state = {
+      error: undefined,
+    };
+  }
+  submit(e) {
+    e.preventDefault();
+    let note = document.querySelector(".note").value.trim();
+    const error = this.props.handleAddNote(note);
+    console.log(error);
+    document.querySelector(".note").value = "";
+
+    this.setState(() => {
+      return {
+        error: error,
+      };
+    });
+  }
+  render() {
+    return (
+      <div>
+        {" "}
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.submit}>
+          <input type="text" className="note"></input>
+          <button>Add Note</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<NoteTakingApp />, document.getElementById("app"));

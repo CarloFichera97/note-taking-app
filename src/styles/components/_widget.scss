@@ -1,0 +1,44 @@
+.widget__title {
+  width: 96%;
+  border: 0.3rem solid darken($background, 40%);
+  background-color: $widget_button;
+  padding: 1rem;
+}
+
+.widget__title__paragraph {
+  margin: 0 0.4rem 0;
+
+  color: darken($off-white, 10%);
+  font-weight: bold;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.widget__notes {
+  border: 0.3rem solid darken($background, 40%);
+  border-top: none;
+
+  text-align: left;
+  margin-top: 0;
+  padding: 2rem;
+  border-bottom: 0;
+  word-break: break-all;
+}
+
+.widget__buttons {
+  display: flex;
+}
+.widget__single_button_remove {
+  width: 50%;
+  text-align: center;
+  border-right: 0.3rem solid darken($background, 40%);
+  border-bottom: 0.3rem solid darken($background, 40%);
+  padding: 0.5rem;
+}
+.widget__single_button_visualize {
+  width: 50%;
+  text-align: center;
+  border-left: 0.3rem solid darken($background, 40%);
+  border-bottom: 0.3rem solid darken($background, 40%);
+  padding: 0.5rem;
+}

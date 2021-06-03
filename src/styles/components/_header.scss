@@ -1,0 +1,29 @@
+.header {
+  background: $chosen;
+  color: darken($off-white, 10%);
+  margin-bottom: $m-size;
+  /* 1.6rem above and below the element and zero on left and right*/
+  padding: $s-size 0;
+  font-weight: bold;
+  /*Scss allows the user to nest the various style*/
+  border-bottom: 0.7rem solid darken($chosen, 10%);
+}
+
+.header__title {
+  font-size: 5rem;
+  margin: 0;
+}
+
+.header__subtitle {
+  font-size: 2rem;
+
+  margin: 0;
+  color: darken($off-white, 8%);
+}
+
+.header__subsubtitle {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0;
+  color: darken($off-white, 8%);
+}

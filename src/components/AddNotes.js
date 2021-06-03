@@ -24,10 +24,12 @@ export default class AddNotes extends React.Component {
     return (
       <div>
         {" "}
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.submit}>
+        {this.state.error && (
+          <p className="add-note-error">{this.state.error}</p>
+        )}
+        <form className="add-note" onSubmit={this.submit}>
           <input type="text" className="note"></input>
-          <button>Add Note</button>
+          <button className="button button--add-note">Add Note</button>
         </form>
       </div>
     );

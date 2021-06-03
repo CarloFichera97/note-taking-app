@@ -1,0 +1,71 @@
+.button {
+  border: none;
+}
+
+.button__remove {
+  border: none;
+  padding: 4rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  font-weight: bold;
+  font-size: 3rem;
+  background-color: $widget_button;
+  border-bottom: 0.7rem solid darken($chosen, 10%);
+  margin-top: 2rem;
+  color: darken($off-white, 10%);
+}
+
+.button__remove:disabled {
+  opacity: 0.5;
+}
+
+.button__remove:hover,
+.button__remove:active {
+  border: none;
+  padding: 4rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  font-weight: bold;
+  font-size: 3rem;
+  background-color: lighten(#b1b57d, 7%);
+  border-bottom: 0.7rem solid darken($chosen, 5%);
+  margin-top: 2rem;
+  color: darken($off-white, 7%);
+  transition: 0.3s;
+}
+
+.button--remove_visualize {
+  font-size: 1.5rem;
+  color: lighten(#0f0c05, 10%);
+  font-weight: bold;
+  padding: 0.6rem 2rem;
+  background-color: $background;
+  font-weight: 500;
+  border: 0.1rem solid darken($chosen, 5%);
+  border-radius: 10%;
+  transition: 0.5s;
+}
+
+.button--remove_visualize:hover,
+.button--remove_visualize:active {
+  font-size: 1.8rem;
+  border: 0.2rem solid darken($chosen, 30%);
+  transition: 0.37s;
+  font-weight: 500;
+  background-color: darken($chosen, 5%);
+}
+
+.button--add-note {
+  background-color: $widget_button;
+  border: 0.2rem solid darken(black, 10%);
+  font-weight: 500;
+  transition: 0.37s;
+}
+
+.button--add-note:hover,
+.button-add-note:active {
+  background-color: $widget_button;
+  border: 0.2rem solid darken(black, 10%);
+  background-color: darken($widget_button, 10%);
+  transition: 0.37s;
+}

@@ -1,0 +1,25 @@
+.add-note {
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: 0.2rem black;
+
+  //We want the input to be as long as possible
+}
+
+.note {
+  //TELLING THE INPUT TO TAKE THE AVAILABLE
+  //SPACE POSSIBLE IN ORDER TO HAVE THE
+  background: $background;
+  flex-grow: 1;
+  color: #070707;
+  font-size: $m-size;
+  padding: 1rem;
+}
+
+.add-note-error {
+  color: #070707;
+  font-style: italic;
+  padding: 0 $m-size;
+  margin: $m-size 0 0 0;
+}

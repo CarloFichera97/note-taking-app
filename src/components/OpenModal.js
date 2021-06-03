@@ -5,7 +5,7 @@ const OpenModal = (props) => {
   return (
     <div>
       <Modal isOpen={props.isOpenModal}>
-        <h2>Note: {props.index + 1}</h2>
+        <h2>Note {props.index + 1}</h2>
         <p>{props.currentNote}</p>
         <li>
           <strong>Date: </strong> {props.currentNoteTime}

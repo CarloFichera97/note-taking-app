@@ -126,25 +126,27 @@ class NoteTakingApp extends React.Component {
   //Using this component only to render the other components
   render() {
     const title = "Note Making App";
-    const subtitle = "Write Down Some Notes";
+    const subtitle = "Save your notes down here!";
 
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Notes
-          notes={this.state.notes}
-          notesLength={this.state.notesLength}
-          notesTime={this.state.notesTime}
-          handleDeleteNotes={this.handleDeleteNotes}
-          handleDeleteNote={this.handleDeleteNote}
-          isOpenModal={this.state.isOpenModal}
-          handleOpenModal={this.handleOpenModal}
-          handleCloseModal={this.handleCloseModal}
-        />
-        <AddNotes
-          handleAddNote={this.handleAddNote}
-          capitalizeInput={this.capitalizeInput}
-        />
+        <div className="container">
+          <Notes
+            notes={this.state.notes}
+            notesLength={this.state.notesLength}
+            notesTime={this.state.notesTime}
+            handleDeleteNotes={this.handleDeleteNotes}
+            handleDeleteNote={this.handleDeleteNote}
+            isOpenModal={this.state.isOpenModal}
+            handleOpenModal={this.handleOpenModal}
+            handleCloseModal={this.handleCloseModal}
+          />
+          <AddNotes
+            handleAddNote={this.handleAddNote}
+            capitalizeInput={this.capitalizeInput}
+          />
+        </div>
       </div>
     );
   }

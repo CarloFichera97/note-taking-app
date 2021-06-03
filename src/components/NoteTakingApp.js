@@ -2,6 +2,7 @@ import React from "react";
 import AddNotes from "./AddNotes";
 import Notes from "./Notes";
 import Header from "./Header";
+import OpenModal from "./OpenModal";
 
 class NoteTakingApp extends React.Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class NoteTakingApp extends React.Component {
       notesLength: [],
       notesTime: [],
       isOpenModal: undefined,
+      currentNote: 0,
+      currentNoteTime: 0,
+      currentNoteLength: 0,
+      index: 0,
     };
   }
 
@@ -29,9 +34,6 @@ class NoteTakingApp extends React.Component {
       localStorage.setItem("notes", jsonNotes);
       localStorage.setItem("notes_time", jsonNotesTime);
       localStorage.setItem("notes_length", jsonNotesLength);
-      //console.log(`Notes: ${jsonNotes}`);
-      //console.log(`Notes -- Time: ${jsonNotesTime}`);
-      //git pushconsole.log(`Notes -- Lenght: ${jsonNotesLength}`);
     }
   }
 
@@ -60,10 +62,14 @@ class NoteTakingApp extends React.Component {
   capitalizeInput(input) {
     return input[0].toUpperCase() + input.slice(1);
   }
-  handleOpenModal() {
+  handleOpenModal(currentNote, currentNoteTime, currentNoteLength, index) {
     this.setState(() => {
       return {
         isOpenModal: true,
+        currentNote: currentNote,
+        currentNoteTime: currentNoteTime,
+        currentNoteLength: currentNoteLength,
+        index: index,
       };
     });
   }
@@ -125,7 +131,7 @@ class NoteTakingApp extends React.Component {
 
   //Using this component only to render the other components
   render() {
-    const title = "Note Making App";
+    const title = "Note Taking App";
     const subtitle = "Save your notes down here!";
 
     return (
@@ -140,11 +146,19 @@ class NoteTakingApp extends React.Component {
             handleDeleteNote={this.handleDeleteNote}
             isOpenModal={this.state.isOpenModal}
             handleOpenModal={this.handleOpenModal}
-            handleCloseModal={this.handleCloseModal}
           />
           <AddNotes
             handleAddNote={this.handleAddNote}
             capitalizeInput={this.capitalizeInput}
+          />
+          <OpenModal
+            isOpenModal={this.state.isOpenModal}
+            handleCloseModal={this.props.handleCloseModal}
+            currentNote={this.state.currentNote}
+            currentNoteTime={this.state.currentNoteTime}
+            currentNoteLength={this.state.currentNoteLength}
+            index={this.state.index}
+            handleCloseModal={this.handleCloseModal}
           />
         </div>
       </div>

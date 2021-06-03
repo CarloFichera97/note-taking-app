@@ -31,10 +31,11 @@
   border-bottom: 0.7rem solid darken($chosen, 5%);
   margin-top: 2rem;
   color: darken($off-white, 7%);
-  transition: 0.3s;
+  transition: 0.3s ease-in-out;
 }
 
-.button--remove_visualize {
+.button--remove_visualize,
+.button__modal {
   font-size: 1.5rem;
   color: lighten(#0f0c05, 10%);
   font-weight: bold;
@@ -43,14 +44,14 @@
   font-weight: 500;
   border: 0.1rem solid darken($chosen, 5%);
   border-radius: 10%;
-  transition: 0.5s;
+  transition: 0.3s ease-in-out;
 }
 
 .button--remove_visualize:hover,
 .button--remove_visualize:active {
   font-size: 1.8rem;
   border: 0.2rem solid darken($chosen, 30%);
-  transition: 0.37s;
+  transition: 0.3s ease-in-out;
   font-weight: 500;
   background-color: darken($chosen, 5%);
 }
@@ -59,7 +60,7 @@
   background-color: $widget_button;
   border: 0.2rem solid darken(black, 10%);
   font-weight: 500;
-  transition: 0.37s;
+  transition: 0.3s ease-in-out;
 }
 
 .button--add-note:hover,
@@ -67,5 +68,14 @@
   background-color: $widget_button;
   border: 0.2rem solid darken(black, 10%);
   background-color: darken($widget_button, 10%);
-  transition: 0.37s;
+  transition: 0.3s ease-in-out;
+}
+
+.button__modal:hover,
+.button__modal:active {
+  border: 0.2rem solid darken($chosen, 30%);
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  background-color: darken($chosen, 5%);
+  font-size: 1.7rem;
 }

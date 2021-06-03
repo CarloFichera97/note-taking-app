@@ -1,5 +1,4 @@
 import React from "react";
-import OpenModal from "./OpenModal";
 
 class Notes extends React.Component {
   render() {
@@ -29,11 +28,19 @@ class Notes extends React.Component {
               <div className="widget__single_button_visualize">
                 <button
                   className="button button--remove_visualize"
-                  onClick={this.props.handleOpenModal}
+                  onClick={(e) =>
+                    this.props.handleOpenModal(
+                      this.props.notes[note],
+                      this.props.notesTime[note],
+                      this.props.notesLength[note],
+                      note
+                    )
+                  }
                 >
                   Visualize
                 </button>
               </div>
+
               <div className="widget__single_button_remove">
                 <button
                   className="button button--remove_visualize"
@@ -49,15 +56,6 @@ class Notes extends React.Component {
                 </button>
               </div>
             </div>
-
-            <OpenModal
-              isOpenModal={this.props.isOpenModal}
-              handleCloseModal={this.props.handleCloseModal}
-              currentNote={this.props.notes[note]}
-              currentNoteTime={this.props.notesTime[note]}
-              currentNoteLength={this.props.notesLength[note]}
-              index={note}
-            />
           </div>
         ))}
       </div>
